@@ -1,38 +1,37 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Product from "./components/Product";
+import axiosProduct from "./axios/axiosProduct";
+import classes from "./App.module.css";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      productList: [],
-    };
-    // this.refreshList = this.refreshList.bind(this);
-  }
+  state = {
+    productList: [],
+  };
 
-  refreshList = () => {
-    axios
+  componentDidMount() {
+    axiosProduct
       .get("/api/protducts/")
       .then((res) => this.setState({ productList: res.data }))
       .catch((err) => console.log(err));
-  };
-  componentWillMount() {
-    this.refreshList();
   }
 
   render() {
     return (
-      <div>
-        <div class="page-header">
-          <h3>Welcome to E-commerce</h3>
-        </div>
-        <div class="row">
-          {this.state.productList.map((item) => (
-            <Product key={item.id} item={item} />
-          ))}
-        </div>
-        <div class="panel-footer">All rights served to aMalik</div>
+      <div className={classes.App}>
+        <h3 className={classes.Intro}>Welcome to E-commerce</h3>
+        {this.state.productList.length === 0 ? (
+          <div>
+            Currently, There are no items available. Thanks for visiting.
+          </div>
+        ) : (
+          <div>
+            {this.state.productList.map((item) => (
+              <Product key={item.id} item={item} />
+            ))}
+          </div>
+        )}
+
+        <div className={classes.Footer}>All rights reserved to aMalik</div>
       </div>
     );
   }
