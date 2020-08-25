@@ -1,18 +1,26 @@
-import React, { Component } from "react";
+import React from "react";
+import classes from "./Product.module.css";
 
-class Product extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div class="jumbotron col-sm-2">
-        <img src={this.props.item.item_image}></img>
-        <mark>{this.props.item.item_title}</mark>
-        <div class="lead ">{this.props.item.item_desc}</div>
-        <div class="text-primary">{this.props.item.item_price}</div>
-      </div>
-    );
-  }
-}
+const Product = (props) => (
+  <div className={classes.Product}>
+    <img src={props.item.item_image_url} alt={props.item.item_title} />
+    <table>
+      <thead>
+        <tr>
+          <td>Item</td>
+          <td>Description</td>
+          <td>Price</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{props.item.item_title}</td>
+          <td>{props.item.item_desc}</td>
+          <td>{props.item.item_price}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+);
+
 export default Product;
