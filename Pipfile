@@ -13,6 +13,7 @@ django = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
 pillow = "*"
+requests = "*"
 
 [requires]
 python_version = "3.8"

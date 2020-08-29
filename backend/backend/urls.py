@@ -22,6 +22,7 @@ router = routers.DefaultRouter()
 router.register('protducts', views.ProductView, 'prod')
 
 urlpatterns = [
+    path('',include(router.urls)),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls))
 ]
