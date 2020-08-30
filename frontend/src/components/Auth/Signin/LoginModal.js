@@ -1,39 +1,50 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import {
   Button,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
-  FormFeedback,
   Container,
 } from "reactstrap";
-import { Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Form, FormGroup, Label, Input } from "reactstrap";
 
-const LoginModal = (props) => {
-  const [modal, setModal] = useState(false);
+class LoginModal extends Component {
+  state = {
+    modal: false,
+    setModal: false,
+  };
 
-  const toggle = () => setModal(!modal);
+  toggle = () =>
+    this.setState((preState) => ({
+      modal: !preState.modal,
+    }));
 
-  return (
-    <div>
-      <button type="button" class="btn btn-outline-info mr-1" onClick={toggle}>
-        Login
-      </button>
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Login</ModalHeader>
-        <ModalBody>
-          <LoginForm />
-        </ModalBody>
-        <ModalFooter>
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
-    </div>
-  );
-};
+  render() {
+    return (
+      <div>
+        <button
+          type="button"
+          className="btn btn-outline-info mr-1"
+          onClick={this.toggle}
+        >
+          Login
+        </button>
+        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+          <ModalHeader toggle={this.toggle}>Login</ModalHeader>
+          <ModalBody>
+            <LoginForm />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="secondary" onClick={this.toggle}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </Modal>
+      </div>
+    );
+  }
+}
 
 export default LoginModal;
 

@@ -1,0 +1,11 @@
+.App{
+  padding-top: 65px;
+}
+
+.Home{
+  display: block;
+  background-color: blue;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
