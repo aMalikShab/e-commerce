@@ -11,4 +11,5 @@
 .icon{
   height: auto;
   width: 10%;
+  cursor: pointer;
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axiosProduct from "./axios/axios";
+import axios from "./axios/axios";
 import classes from "./App.module.css";
 import NavBar from "./components/UI/NavBar";
 import SideBar from "./components/home/home_side_bars";
@@ -16,8 +16,8 @@ class App extends Component {
   };
 
   componentDidMount() {
-    axiosProduct
-      .get("/api/protducts/")
+    axios
+      .get("/api/products/")
       .then((res) => this.setState({ products: res.data }))
       .catch((err) => console.log(err));
   }

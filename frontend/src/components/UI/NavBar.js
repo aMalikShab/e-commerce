@@ -2,6 +2,7 @@ import React from "react";
 import LoginModal from "../Auth/Signin/LoginModal";
 import { NavLink } from "react-router-dom";
 import Prabhu from "../../assets/ShriRam.jpg";
+import SignupModal from "../Auth/Signup/SignupModal";
 
 const NavBar = () => {
   return (
@@ -34,15 +35,12 @@ const NavBar = () => {
             <NavLink className="nav-item nav-link " to="/">
               <span>Home</span>
             </NavLink>
-            
+
             <NavLink className="nav-item nav-link" to="/about-us">
               <span>About us</span>
             </NavLink>
             <NavLink className="nav-item nav-link" to="/slides">
               <span>Slides</span>
-            </NavLink>
-            <NavLink className="nav-item nav-link" to="/cart">
-              <span>Cart</span>
             </NavLink>
             <NavLink className="nav-item nav-link" to="/products">
               <span>Products</span>
@@ -61,9 +59,7 @@ const NavBar = () => {
             </form>
 
             <LoginModal />
-            <button type="button" className="btn btn-outline-info ml-1">
-              Sign up
-            </button>
+            <SignupModal />
           </div>
         </div>
       </nav>
