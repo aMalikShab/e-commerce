@@ -17,12 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from customer import views
+from customer import urls
 
 router = routers.DefaultRouter()
-router.register('protducts', views.ProductView, 'prod')
+router.register("products", views.ProductView, "prod")
 
 urlpatterns = [
-    path('',include(router.urls)),
-    path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path("", include(router.urls)),
+    path("admin/", admin.site.urls),
+    path("api/", include("customer.urls"))
 ]

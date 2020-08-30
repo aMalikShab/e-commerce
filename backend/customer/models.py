@@ -5,8 +5,17 @@ import os
 import json
 from PIL import Image
 
-class Product(models.Model):
 
+class User(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
+class Product(models.Model):
     item_title = models.CharField(max_length=50)
     item_desc = models.TextField()
     item_price = models.IntegerField()
@@ -15,13 +24,13 @@ class Product(models.Model):
 
     def save(self):
         super().save()
-        img = Image.open(self.item_image.path) # Open image using self
+        img = Image.open(self.item_image.path)  # Open image using self
 
         if img.height > 300 or img.width > 300:
             new_img = (300, 300)
             img.thumbnail(new_img)
             img.save(self.item_image.path)
-        
+
         encodedString = base64.b64encode(self.item_image.file.read())
         data = {"key": os.environ.get("IMG_BB"), "image": encodedString.decode("utf-8")}
         uploadedImageInfo = requests.post("https://api.imgbb.com/1/upload", data=data)
