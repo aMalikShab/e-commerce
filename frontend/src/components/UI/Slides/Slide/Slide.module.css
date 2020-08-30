@@ -1,0 +1,15 @@
+.Slide {
+  display: inline;
+  text-align: center;
+}
+
+.image {
+  height: auto;
+  width: 60%;
+}
+
+.icon{
+  height: auto;
+  width: 10%;
+  cursor: pointer;
+}

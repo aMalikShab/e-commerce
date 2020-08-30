@@ -1,61 +1,54 @@
 import React, { Component } from "react";
-import Product from "./home_components/product_list";
-import axiosProduct from "./axios/axiosProduct";
-import "./css_files/App.css";
-import NavBar from "./home_components/NavBar";
-import SideBar from "./home_components/home_side_bars";
-import ImageSlide from "./home_components/home_image_carousel";
-import PageSlider from "./home_components/page_slider";
+import axios from "./axios/axios";
+import classes from "./App.module.css";
+import NavBar from "./components/UI/NavBar";
+import SideBar from "./components/home/home_side_bars";
+import PageSlider from "./components/home/page_slider";
+import WomenInMarket from "./assets/women-village-market.jpg";
+import { Route } from "react-router-dom";
+import Products from "./components/Products/Products";
+import AboutUs from "./components/About/AboutUs";
+import Slides from "./components/UI/Slides/Slides";
 
 class App extends Component {
   state = {
-    productList: [],
+    products: [],
   };
 
   componentDidMount() {
-    axiosProduct
-      .get("/api/protducts/")
-      .then((res) => this.setState({ productList: res.data }))
+    axios
+      .get("/api/products/")
+      .then((res) => this.setState({ products: res.data }))
       .catch((err) => console.log(err));
   }
 
   render() {
     return (
-      <div>
-        <header class="bg-primary text-white">
-          <div class="container text-center">
-            <h1>Welcome to E-commerce</h1>
-            <img src="components/women-village-market.jpg" alt="img" />
-            <p>Best place to find dil wali sarkar.</p>
-          </div>
-        </header>
-
+      <div className={classes.App}>
         <NavBar />
-        <ImageSlide />
-
-        <div class="container border mt-5">
-          <div class="row">
+        <div className={classes.Home}>
+          <h1>Welcome to E-commerce</h1>
+          <img src={WomenInMarket} alt="women-in-village-market" />
+          <p>Best place to find dil wali sarkar.</p>
+        </div>
+        <Route path="/slides" component={Slides} />
+        <div className="container border mt-5">
+          <div className="row">
             <SideBar />
-            <div class="col-sm-9 pl-3 border">
-              {this.state.productList.length === 0 ? (
-                <div>
-                  Currently, There are no items available. Thanks for visiting.
-                </div>
-              ) : (
-                <div class="row">
-                  {this.state.productList.map((item) => (
-                    <Product key={item.id} item={item} />
-                  ))}
-                </div>
-              )}
+            <div className="col-sm-9 pl-3 border">
+              <Route
+                path="/products"
+                component={() => <Products products={this.state.products} />}
+              ></Route>
             </div>
+            <Route path="/about-us" component={AboutUs}></Route>
           </div>
           <PageSlider />
         </div>
 
-        <footer class="py-5 bg-dark">
-          <div class="container">
-            <p class="m-0 text-center text-white">
+        <footer className="py-5 bg-dark">
+          <div className="container">
+            <p className="m-0 text-center text-white">
               Copyright &copy; All rights reserved to GadiWala
             </p>
           </div>
