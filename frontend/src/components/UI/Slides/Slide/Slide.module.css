@@ -1,8 +1,14 @@
 .Slide {
-  width: 100%;
+  display: inline;
+  text-align: center;
 }
 
 .image {
-  height: 500px;
-  width: 500px;
+  height: auto;
+  width: 60%;
+}
+
+.icon{
+  height: auto;
+  width: 10%;
 }

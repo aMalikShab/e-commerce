@@ -32,7 +32,6 @@ class App extends Component {
           <p>Best place to find dil wali sarkar.</p>
         </div>
         <Route path="/slides" component={Slides} />
-        {/* <ImageSlide /> */}
         <div className="container border mt-5">
           <div className="row">
             <SideBar />
