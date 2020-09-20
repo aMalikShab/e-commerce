@@ -20,7 +20,7 @@ from customer import views
 from customer import urls
 
 router = routers.DefaultRouter()
-router.register("products", views.ProductView, "prod")
+# router.register("products", views.ProductView, "prod")
 
 urlpatterns = [
     path("", include(router.urls)),

@@ -9,7 +9,6 @@ import { Route } from "react-router-dom";
 import Products from "./components/Products/Products";
 import AboutUs from "./components/About/AboutUs";
 import Slides from "./components/UI/Slides/Slides";
-
 class App extends Component {
   state = {
     products: [],
@@ -32,6 +31,7 @@ class App extends Component {
           <p>Best place to find dil wali sarkar.</p>
         </div>
         <Route path="/slides" component={Slides} />
+        <Route path="/about-us" component={AboutUs}></Route>
         <div className="container border mt-5">
           <div className="row">
             <SideBar />
@@ -41,7 +41,6 @@ class App extends Component {
                 component={() => <Products products={this.state.products} />}
               ></Route>
             </div>
-            <Route path="/about-us" component={AboutUs}></Route>
           </div>
           <PageSlider />
         </div>

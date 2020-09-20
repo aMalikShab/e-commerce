@@ -5,16 +5,6 @@ import os
 import json
 from PIL import Image
 
-
-class User(models.Model):
-    name = models.CharField(max_length=50)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
-
-
 class Product(models.Model):
     item_title = models.CharField(max_length=50)
     item_desc = models.TextField()
@@ -40,4 +30,3 @@ class Product(models.Model):
 
     def __str__(self):
         return self.item_title
-

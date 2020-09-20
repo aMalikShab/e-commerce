@@ -8,11 +8,74 @@ import {
   Container,
 } from "reactstrap";
 import { Form, FormGroup, Label, Input } from "reactstrap";
+import axios from "../../../axios/axios";
 
 class LoginModal extends Component {
   state = {
     modal: false,
-    setModal: false,
+
+    email: "",
+    password: "",
+  };
+
+  saveToken = (response) => {
+    const data = response.data;
+    for (var key in data) {
+      if (key == "token") {
+        alert("login success. Token genrated.");
+        this.loginSuccess(data[key]);
+      } else {
+        alert("enter valid credential");
+      }
+    }
+  };
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const data = {
+      username: this.state.email,
+      password: this.state.password,
+    };
+
+    axios
+      .post("/api/signin/", data)
+      .then((response) => this.saveToken(response))
+      .catch((error) => console.log("error", error));
+  };
+
+  updateValueHandler = (event, inputIdentifier) => {
+    this.setState({ [inputIdentifier]: event.target.value });
+  };
+
+  LoginForm = () => {
+    return (
+      <Container>
+        <Form>
+          <FormGroup row>
+            <Label for="exmapleEmail">Email</Label>
+            <Input
+              type="email"
+              name="email"
+              id="exampleEmail"
+              placeholder="something like abc@asgj.com"
+              onChange={(event) => this.updateValueHandler(event, "email")}
+            />
+          </FormGroup>
+          <FormGroup row>
+            <Label for="exmaplePassword">Password</Label>
+            <Input
+              type="password"
+              name="password"
+              id="examplePassword"
+              placeholder="time to ask something serious"
+              onChange={(event) => this.updateValueHandler(event, "password")}
+            />
+          </FormGroup>
+          <Button type="submit" color="primary" onClick={this.handleSubmit}>
+            Submit
+          </Button>
+        </Form>
+      </Container>
+    );
   };
 
   toggle = () =>
@@ -32,9 +95,7 @@ class LoginModal extends Component {
         </button>
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Login</ModalHeader>
-          <ModalBody>
-            <LoginForm />
-          </ModalBody>
+          <ModalBody>{this.LoginForm()}</ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>
               Cancel
@@ -47,37 +108,3 @@ class LoginModal extends Component {
 }
 
 export default LoginModal;
-
-const handleSubmit = () => {
-  alert("form submit not implemented yat.");
-};
-
-const LoginForm = () => {
-  return (
-    <Container>
-      <Form onSubmit={handleSubmit}>
-        <FormGroup row>
-          <Label for="exmapleEmail">Email</Label>
-          <Input
-            type="email"
-            name="email"
-            id="exampleEmail"
-            placeholder="something like abc@asgj.com"
-          />
-        </FormGroup>
-        <FormGroup row>
-          <Label for="exmaplePassword">Password</Label>
-          <Input
-            type="password"
-            name="password"
-            id="examplePassword"
-            placeholder="time to ask something serious"
-          />
-        </FormGroup>
-        <Button type="submit" color="primary">
-          Submit
-        </Button>
-      </Form>
-    </Container>
-  );
-};
