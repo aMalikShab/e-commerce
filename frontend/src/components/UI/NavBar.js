@@ -1,10 +1,12 @@
 import React from "react";
 import LoginModal from "../Auth/Signin/LoginModal";
+import SignupModal from "../Auth/Signup/SignupModal";
+import LogoutModal from "../Auth/Signout/LogoutModal";
+import Cart from "./Cart/Cart";
 import { NavLink } from "react-router-dom";
 import Prabhu from "../../assets/ShriRam.jpg";
-import SignupModal from "../Auth/Signup/SignupModal";
 
-const NavBar = () => {
+const NavBar = (props) => {
   return (
     <div>
       <nav className="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
@@ -58,7 +60,16 @@ const NavBar = () => {
               </div>
             </form>
 
-            <LoginModal />
+            <Cart cart_item={props.cart_item} />
+
+            {props.log_status ? (
+              <LogoutModal
+                first_name={props.first_name}
+                handleLogout={props.handleLogout}
+              />
+            ) : (
+              <LoginModal handleLogin={props.handleLogin} />
+            )}
             <SignupModal />
           </div>
         </div>

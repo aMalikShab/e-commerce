@@ -47,12 +47,13 @@ class SignupModal extends Component {
 
   handleErrorResponse = (error) => {
     const data = error.response.data;
-
-    if (Object.keys(data) == "username") {
-      this.setState((preState) => ({
-        emailErrorMessage: String(data["email"]),
-        isInvalidMail: true,
-      }));
+    for (var key in data) {
+      if (key == "username") {
+        this.setState((preState) => ({
+          emailErrorMessage: String(data[key]),
+          isInvalidMail: true,
+        }));
+      }
     }
   };
 
